@@ -2,6 +2,7 @@ import {prototypeNodeRepo} from "./repo/__prototypeNodesRepo.js";
 import {guardName, guardSpec} from "./utils/__validation.js";
 // 開一個map來存prototype node
 
+// 傳入name和spec，透過工廠函式建立一個prototype node並存入repo
 export function createNodePrototype(name, spec) {
   guardName(name)
   guardSpec(spec)
