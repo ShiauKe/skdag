@@ -4,6 +4,7 @@ import { createNodePrototype } from "./prototypeNode/__createNodeProtoType.js";
 import { getNodePrototype } from "./prototypeNode/__getNodeProtoType.js";
 import { prototypeNodeRepo } from "./prototypeNode/repo/__prototypeNodesRepo.js";
 import { cloneNodeFromPrototypeRepo } from "./cloneNode/__cloneNode.js";
+import { getNodeClone } from "./cloneNode/__getNodeClone.js";
 // import { instantiate } from "./instantiate.js";
 // import { run } from "./run.js";
 
@@ -12,6 +13,7 @@ export const k = Object.freeze({
         createNodePrototype,
         getNodePrototype,
         cloneNodeFromPrototypeRepo,
+        getNodeClone
 //   instantiate,
 //   run
 });
