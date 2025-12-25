@@ -1,6 +1,5 @@
 import {cloneNodesRepo} from "./__cloneNodesRepo.js";
 import {getNodePrototype} from "../prototypeNode/__getNodeProtoType.js";
-import { randomUUID } from "crypto";
 
 
 export function cloneNodeFromPrototypeRepo(graph) {
@@ -10,17 +9,15 @@ export function cloneNodeFromPrototypeRepo(graph) {
   // clone node 的內容來自 prototype node
   // 包含 input, output 的 runtime storage 物件(將 prototype spec 具現化轉成 runtime 物件)
   for (const node of graph.nodes){
-    const cloneNodeId = randomUUID();
     const proto = getNodePrototype(node.name);
     const clone = {
       nodeId: node.nodeId,
-      cloneId: cloneNodeId,
       prototypeName: node.name,
       input: materializePort(proto.input),
       output: materializePort(proto.output),
       handler: proto.handler
     }
-    cloneNodesRepo.set(cloneNodeId, clone);
+    cloneNodesRepo.set(node.nodeId, clone);
   }
 }
 
