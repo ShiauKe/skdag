@@ -10,13 +10,27 @@ export function cloneNodeFromPrototypeRepo(graph) {
   // 包含 input, output 的 runtime storage 物件(將 prototype spec 具現化轉成 runtime 物件)
   for (const node of graph.nodes){
     const proto = getNodePrototype(node.name);
+    if (cloneNodesRepo.has(node.nodeId)) {
+      throw new Error(`Duplicate nodeId in clone repo: ${node.nodeId}`);
+    }
+    const inputBoxes  = materializePort(proto.input);
+const outputBoxes = materializePort(proto.output);
     const clone = {
       nodeId: node.nodeId,
       prototypeName: node.name,
-      input: materializePort(proto.input),
-      output: materializePort(proto.output),
+      // input: materializePort(proto.input),
+      // output: materializePort(proto.output),
+      // / 引擎內部用
+      _inputBoxes: inputBoxes,
+      _outputBoxes: outputBoxes,
+
+      // 使用者 / handler 看到的
+      input: createValueView(inputBoxes),
+      output: createValueView(outputBoxes),
       handler: proto.handler
-    }
+
+      }
+
     cloneNodesRepo.set(node.nodeId, clone);
   }
 }
@@ -48,7 +62,23 @@ export function cloneNodeFromPrototypeRepo(graph) {
 function materializePort(portSpec) {
   const port = {};
   for (const spec of portSpec) {
-    port[spec.name] = undefined;
+    port[spec.name] = { value: undefined };
   }
   return port;
 }
+
+function createValueView(boxes) {
+  return new Proxy({}, {
+    get(_, key) {
+      return boxes[key]?.value;
+    },
+    set(_, key, val) {
+      if (!boxes[key]) {
+        throw new Error(`Unknown port: ${String(key)}`);
+      }
+      boxes[key].value = val;
+      return true;
+    }
+  });
+}
+

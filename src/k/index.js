@@ -5,9 +5,12 @@ import { getNodePrototype } from "./prototypeNode/__getNodeProtoType.js";
 import { prototypeNodeRepo } from "./prototypeNode/repo/__prototypeNodesRepo.js";
 import { cloneNodeFromPrototypeRepo } from "./cloneNode/__cloneNode.js";
 import { getNodeCloneRepo } from "./cloneNode/__getNodeClone.js";
+import { injectExternalInputs } from "./externalInjection/__injection.js";
 import { topoSortByEdges } from "./topoSort/__topoSortByEdges.js";
-// import { instantiate } from "./instantiate.js";
-// import { run } from "./run.js";
+import { execGraph } from "./executeGraph/__executeGraph.js";
+import { bindDataSpace } from "./bindDataSpace/__bindDataSpace.js";
+// import { executeGraph } from "./executeGraph/__executeGraph.js";
+
 
 export const k = Object.freeze({
         prototypeNodeRepo,
@@ -15,7 +18,11 @@ export const k = Object.freeze({
         getNodePrototype,
         cloneNodeFromPrototypeRepo,
         getNodeCloneRepo,
-        topoSortByEdges
+        bindDataSpace,
+        injectExternalInputs,
+        topoSortByEdges,
+        execGraph
+        // executeGraph
 //   instantiate,
 //   run
 });
