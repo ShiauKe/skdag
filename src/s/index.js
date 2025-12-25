@@ -1,5 +1,6 @@
 import { k } from "../k/index.js";
-
+import { topoSortByEdges } from "../k/topoSort/__topoSortByEdges.js";
+import { printGraph, printNeighborhood } from "./observe.js";
 /**
  * Shell API
  * This is the only surface users should touch.
@@ -12,18 +13,8 @@ export const s = Object.freeze({
   registerPrototypeNode(name, spec) {
     return k.createNodePrototype(name, spec);
   },
-
-  /**
-   * Build a runnable flow from a graph
-   */
-//   build(graph, inputs) {
-//     return k.instantiate(graph, inputs);
-//   },
-
-  /**
-   * Execute a built flow
-   */
-//   run(instance, ctx) {
-//     return k.run(instance, ctx);
-//   }
+  getNodeCloneRepo(){return k.getNodeCloneRepo()},
+  topoSortByEdges(graph){return k.topoSortByEdges(graph)},
+  printGraph(graph){return printGraph(graph)},
+  printNeighborhood(graph, nodeId){return printNeighborhood(graph, nodeId)},
 });

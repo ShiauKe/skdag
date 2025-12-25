@@ -13,6 +13,7 @@ export function cloneNodeFromPrototypeRepo(graph) {
     const cloneNodeId = randomUUID();
     const proto = getNodePrototype(node.name);
     const clone = {
+      nodeId: node.nodeId,
       cloneId: cloneNodeId,
       prototypeName: node.name,
       input: materializePort(proto.input),
