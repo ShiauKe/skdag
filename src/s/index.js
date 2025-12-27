@@ -1,5 +1,6 @@
 import { k } from "../k/index.js";
 import { printGraph, printNeighborhood } from "./observe.js";
+import { run } from "./run.js";
 /**
  * Shell API
  * This is the only surface users should touch.
@@ -8,8 +9,8 @@ export const s = Object.freeze({
         getProtoTypeRepo(){
                 return k.prototypeNodeRepo
         },
-        registerPrototypeNode(name, spec) {
-                return k.createNodePrototype(name, spec);
+        registerPrototypeNode(node) {
+                return k.createNodePrototype(node.name, node.spec);
         },
         getNodeCloneRepo(){
                 return k.getNodeCloneRepo()
@@ -25,5 +26,8 @@ export const s = Object.freeze({
         },
         executeGraph(graph){ 
                 return k.executeGraph(graph)
+        },
+        run(graph, externalInputs) {
+                return run(graph, externalInputs)
         }
 });
