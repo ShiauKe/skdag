@@ -1,5 +1,5 @@
 
-export function execGraph(topoOrder, cloneRepo) {
+export async function execGraph(topoOrder, cloneRepo) {
   for (const nodeId of topoOrder) {
     const clone = cloneRepo.get(nodeId);
 
@@ -10,6 +10,6 @@ export function execGraph(topoOrder, cloneRepo) {
     // handler 只負責：
     // - 讀 input
     // - 寫 output
-    clone.handler(clone.input, clone.output);
+    await clone.handler(clone.input, clone.output);
   }
 }
