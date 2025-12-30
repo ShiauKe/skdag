@@ -14,7 +14,7 @@ export function cloneNodeFromPrototypeRepo(graph) {
       throw new Error(`Duplicate nodeId in clone repo: ${node.nodeId}`);
     }
     const inputBoxes  = materializePort(proto.input);
-const outputBoxes = materializePort(proto.output);
+    const outputBoxes = materializePort(proto.output);
     const clone = {
       nodeId: node.nodeId,
       prototypeName: node.name,
@@ -27,13 +27,11 @@ const outputBoxes = materializePort(proto.output);
       // 使用者 / handler 看到的
       input: createValueView(inputBoxes),
       output: createValueView(outputBoxes),
-      handler: proto.handler
-
-      }
-
+      handler: proto.handler,
+    }
     cloneNodesRepo.set(node.nodeId, clone);
   }
-}
+}; 
 
 
 /**
